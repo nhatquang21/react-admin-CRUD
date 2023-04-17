@@ -14,6 +14,7 @@
     "moment": "^2.29.4",
     "ra-data-json-server": "^4.9.1",
     "ra-data-lb4": "^0.4.0",
+    "ra-language-vietnamese": "^3.0.1",
     "react": "^18.2.0",
     "react-admin": "^4.9.1",
     "react-dom": "^18.2.0",

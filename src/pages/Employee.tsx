@@ -1,6 +1,7 @@
 import {
   BooleanField,
   Datagrid,
+  FunctionField,
   List,
   ReferenceField,
   TextField,
@@ -12,7 +13,11 @@ export const EmployeeList = () => (
       <TextField source="id" />
       <TextField source="name" />
       <BooleanField source="status" />
-      <ReferenceField source="userId" reference="users" />
+      <ReferenceField source="userId" reference="users">
+        <FunctionField
+          render={(record: any) => record && `${record.username}`}
+        />
+      </ReferenceField>
     </Datagrid>
   </List>
 );

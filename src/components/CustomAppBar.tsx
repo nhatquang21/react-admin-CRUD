@@ -1,18 +1,16 @@
 import {
   AppBar,
   TitlePortal,
-  ToggleThemeButton,
-  defaultTheme,
-  useUserMenu,
   UserMenu,
   Logout,
-  useRedirect,
   Link,
+  useTranslate,
 } from 'react-admin';
 import { MenuItem, ListItemIcon, ListItemText } from '@mui/material';
 import SettingsIcon from '@mui/icons-material/Settings';
 
 const SettingsMenuItem = () => {
+  const translate = useTranslate();
   return (
     <MenuItem>
       <ListItemIcon>
@@ -20,7 +18,7 @@ const SettingsMenuItem = () => {
       </ListItemIcon>
       <ListItemText>
         <Link sx={{ color: 'black' }} to="/changePWD">
-          Change password
+          {translate('buttons.changePWD')}
         </Link>
       </ListItemText>
     </MenuItem>
@@ -35,7 +33,9 @@ const MyAppBar = () => (
         <Logout />
       </UserMenu>
     }
-  />
+  >
+    <TitlePortal />
+  </AppBar>
 );
 
 export default MyAppBar;

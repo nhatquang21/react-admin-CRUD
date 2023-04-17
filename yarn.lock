@@ -9357,6 +9357,7 @@ __metadata:
     moment: ^2.29.4
     ra-data-json-server: ^4.9.1
     ra-data-lb4: ^0.4.0
+    ra-language-vietnamese: ^3.0.1
     react: ^18.2.0
     react-admin: ^4.9.1
     react-dom: ^18.2.0
@@ -11086,6 +11087,13 @@ __metadata:
   dependencies:
     ra-core: ^4.9.2
   checksum: 91be0c1a733629255f095936eb7c2d765ea295344377c6621d8ffd45ed9fcf75a393a02c6d459775c67342110f8fb3adf858022180c31653ba47879d0c789f47
+  languageName: node
+  linkType: hard
+
+"ra-language-vietnamese@npm:^3.0.1":
+  version: 3.0.1
+  resolution: "ra-language-vietnamese@npm:3.0.1"
+  checksum: 05d44e54d003d8ba2614bf421faa0948889c02d386d0d173d6d21fe9d72450ce02b4f4c711f7eddf614ddbeb0e28194ed7d5e654443ccea9acd3bb96c3622b45
   languageName: node
   linkType: hard
 

@@ -13,7 +13,7 @@ const MyLoginPage = (props: { theme?: any }) => {
     e.preventDefault();
 
     login({ username, password }, '/').catch(() =>
-      notify('Invalid email or password')
+      notify('Invalid username or password')
     );
   };
 

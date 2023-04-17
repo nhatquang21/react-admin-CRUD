@@ -8,12 +8,14 @@ import {
   required,
   SimpleForm,
   TextInput,
+  useTranslate,
 } from 'react-admin';
 import _ from 'lodash';
 
 const ConfirmPWDValidation = (value: any, allValue: any) => {
+  const translate = useTranslate();
   if (value !== allValue.pwd) {
-    return 'The passwords do not match';
+    return translate('error.passwordsDoNotMatch');
   }
 };
 

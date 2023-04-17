@@ -21,9 +21,8 @@ const logout = async () => {
 
 const checkError = (error: any) => {
   const status = error.status;
-  console.log(status);
+
   if (status === 401) {
-    console.log('hehee');
     storage.remove(LocalStorageKeys.AUTH);
     return Promise.reject();
   }

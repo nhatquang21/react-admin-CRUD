@@ -24,7 +24,7 @@ type Filter = {
 };
 
 const normalizeFilter = (filter: any): Filter => {
-  let { pagination, where = {}, filter: cFilter, sort, include } = filter;
+  let { pagination, where = {}, filter: cFilter, sort } = filter;
   const { page, perPage } = pagination;
   let paramSorts: string[] = [];
   if (!_.isArray(sort)) {
@@ -81,7 +81,7 @@ const dataProvider = {
 
   getOne: async (resource: string, params: any) => {
     const { meta = {}, id } = params;
-    // console.log(params);
+
     if (!id) {
       return { data: { id: 0 } };
     }
@@ -157,7 +157,7 @@ const dataProvider = {
   update: async (resource: string, params: any) => {
     const apiUrl = `${BASE_URL}`;
     let url = `${apiUrl}/${resource}/${params.id}`;
-    console.log(params);
+
     let options = getOptions();
     options = {
       ...options,
@@ -166,7 +166,7 @@ const dataProvider = {
     };
 
     const res = await fetchJson(url, options);
-    console.log(res);
+
     let { json: data } = res;
     return { data };
   },
@@ -183,14 +183,13 @@ const dataProvider = {
     };
     const res = await fetchJson(url, options);
     let { json: data } = res;
-    console.log(res);
+
     return { data };
   },
   deleteMany: (resource: string, params: any) => {
     // TODO
   },
   remote: async (resource: string, params: any, method: string) => {
-    console.log('remote');
     const { meta = {} } = params;
     const { filter, query: metaQuery = {} } = meta;
 
@@ -214,9 +213,9 @@ const dataProvider = {
         body: JSON.stringify(params.data),
       };
     }
-    console.log(options);
+
     const res = await fetchJson(url, options);
-    console.log(res);
+
     let { json: data } = res;
     return { data };
   },

@@ -3,6 +3,7 @@ import {
   DateField,
   DeleteButton,
   EditButton,
+  FunctionField,
   List,
   ReferenceField,
   TextField,
@@ -19,7 +20,9 @@ export const UserList = () => {
         <TextField source="username" />
         <DateField showTime source="createdOn" />
         <DateField showTime source="updatedOn" />
-        <ReferenceField source="roleId" reference="roles" />
+        <ReferenceField source="roleId" reference="roles">
+          <FunctionField render={(record: any) => record && `${record.name}`} />
+        </ReferenceField>
         {permissions === 'admin' ? <EditButton /> : null}
         {permissions === 'admin' ? <DeleteButton /> : null}
       </Datagrid>

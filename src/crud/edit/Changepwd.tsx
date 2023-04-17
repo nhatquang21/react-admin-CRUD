@@ -1,19 +1,17 @@
 import {
-  DateInput,
-  Edit,
   maxLength,
   minLength,
   PasswordInput,
-  ReferenceInput,
   required,
   SimpleForm,
-  TextInput,
+  useNotify,
+  useTranslate,
 } from 'react-admin';
 import _ from 'lodash';
 import { dataProvider } from '../../provider/dataProvider';
-import { load } from '../../provider/storage';
 import { storage } from '../../provider';
 import { LocalStorageKeys } from '../../constants';
+import { FunctionComponent } from 'react';
 
 const ConfirmPWDValidation = (value: any, allValue: any) => {
   if (value !== allValue.newPwd) {
@@ -40,40 +38,48 @@ const transform = (data: any) => {
 
   return data;
 };
-const ChangePWD = () => {
+const ChangePWD: FunctionComponent = () => {
+  const notify = useNotify();
+
+  const translate = useTranslate();
+  const handleSubmit = async (values: any) => {
+    try {
+      values = transform(values);
+      const params = {
+        data: { ...values },
+      };
+      await dataProvider.remote('changePWD', params, 'PATCH');
+      notify(translate(`message.changePWDSuccess`), { type: 'success' });
+    } catch (e: any) {
+      notify(translate(`message.oldPwdWrong`), { type: 'error' });
+    }
+  };
+
   return (
     <>
-      <h1>Change password</h1>
+      <h1> {translate('buttons.changePWD')}</h1>
       <SimpleForm
-        onSubmit={async (values) => {
-          let item = storage.load(LocalStorageKeys.AUTH);
-
-          values = transform(values);
-          const params = {
-            data: { ...values },
-          };
-          dataProvider.remote('changePWD', params, 'PATCH');
-        }}
+        onSubmit={handleSubmit}
         reValidateMode="onChange"
         mode="onBlur"
       >
         <PasswordInput
           sx={{ width: 300 }}
           validate={validatePWD}
+          label={translate('inputs.pwd')}
           source="pwd"
-          label="Current password"
         />
         <PasswordInput
           sx={{ width: 300 }}
           validate={validateNewPwd}
+          label={translate('inputs.newPwd')}
           source="newPwd"
-          label="New password"
         />
         <PasswordInput
           sx={{ width: 300 }}
           validate={validateConfPWD}
+          label={translate('inputs.confPwd')}
           source="confPwd"
-          label="Confirm password"
         />
       </SimpleForm>
     </>

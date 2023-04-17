@@ -1,26 +1,23 @@
-import { useEffect, useState, useMemo } from 'react';
 import {
   ArrayInput,
   DateTimeInput,
   FormDataConsumer,
-  NumberField,
   NumberInput,
   ReferenceInput,
   SimpleForm,
   SimpleFormIterator,
-  TextField,
   TextInput,
   useGetList,
-  useInput,
   useRecordContext,
+  useTranslate,
 } from 'react-admin';
 import _ from 'lodash';
 import NumberInputCustom from './NumberInputCustom';
-import { log } from 'console';
+
 
 const OrderEditForm = (props: any) => {
   let record = useRecordContext();
-
+  let translate = useTranslate();
   const orderDishes = record.orderDishes;
   const dishes = record.dishes;
 
@@ -94,11 +91,29 @@ const OrderEditForm = (props: any) => {
           source="customerId"
           reference="customers"
         />
-        <ArrayInput label="Menu" source="newMapping">
+        <ArrayInput
+          label={translate('resources.menu.name')}
+          source="newMapping"
+        >
           <SimpleFormIterator inline disableAdd disableClear>
-            <TextInput source="name" helperText={false} disabled />
-            <NumberInput source="price" helperText={false} disabled />
-            <NumberInput min={0} source="dishQuantity" helperText={false} />
+            <TextInput
+              label={translate('resources.menu.fields.dishId')}
+              source="name"
+              helperText={false}
+              disabled
+            />
+            <NumberInput
+              label={translate('resources.menu.fields.price')}
+              source="price"
+              helperText={false}
+              disabled
+            />
+            <NumberInput
+              label={translate('resources.menu.fields.quantity')}
+              min={0}
+              source="dishQuantity"
+              helperText={false}
+            />
             <FormDataConsumer>
               {({ formData, scopedFormData, getSource, ...rest }) => {
                 // console.log('==scopeformdata', scopedFormData);

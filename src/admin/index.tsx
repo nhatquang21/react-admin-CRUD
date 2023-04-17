@@ -1,13 +1,4 @@
-import {
-  Admin,
-  Resource,
-  ListGuesser,
-  Layout,
-  List,
-  EditGuesser,
-  CustomRoutes,
-  usePermissions,
-} from 'react-admin';
+import { Admin, Resource, Layout, CustomRoutes } from 'react-admin';
 
 import { authProvider, dataProvider, storage } from '../provider';
 import SwitchAccountIcon from '@mui/icons-material/SwitchAccount';
@@ -25,13 +16,13 @@ import { OrderCreate } from '../crud/create/OrderCreate';
 import { UserList } from '../pages/UserList';
 import { UserEdit } from '../crud/edit/UserEdit';
 import { UserCreate } from '../crud/create/UserCreate';
-import { BrowserRouter, Route } from 'react-router-dom';
-import { LocalStorageKeys } from '../constants';
+import { Route } from 'react-router-dom';
 import { CustomerList } from '../pages/Customer';
 import { EmployeeList } from '../pages/Employee';
 import { RoleList } from '../pages/Role';
 import ChangePWD from '../crud/edit/Changepwd';
 import MyAppBar from '../components/CustomAppBar';
+import i18nProvider from '../provider/i18nProvider';
 
 export const MyLayout = (props: any) => (
   <>
@@ -41,9 +32,11 @@ export const MyLayout = (props: any) => (
 );
 
 const App = () => {
+  // const history = createBrowserHistory();
   return (
     <Admin
       dataProvider={dataProvider as any}
+      i18nProvider={i18nProvider}
       dashboard={Dashboard}
       loginPage={MyLoginPage}
       layout={MyLayout}
@@ -96,7 +89,7 @@ const App = () => {
               <Resource
                 name="employees"
                 list={EmployeeList}
-                recordRepresentation="name"
+                recordRepresentation={(record: any) => `${record.name} `}
               />
               <Resource
                 name="roles"
